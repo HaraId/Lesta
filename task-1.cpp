@@ -37,16 +37,21 @@ bool isEven_2(int num) noexcept {
     return (num & 1) == 0;
 }
 
-// 3) Строго говоря, целочисленно число - это любое целое
-// а значит, хотелось бы принимать не только int (4 байта) но и какой-то int64_t
-// Мы можем сделать одну общую функцию, которая будет принимать сразу максимальное число
-bool isEven_3(std::size_t num) noexcept {
+// 3) Сделаем функцию встраиваемой 
+inline bool isEven_3(int num) noexcept {
     return (num & 1) == 0;
 }
 
-// 4) Пару мыслей про шаблонынй тип
+// 4) Строго говоря, целочисленно число - это любое целое
+// а значит, хотелось бы принимать не только int (4 байта) но и какой-то int64_t
+// Мы можем сделать одну общую функцию, которая будет принимать сразу максимальное число
+inline bool isEven_4(std::size_t num) noexcept {
+    return (num & 1) == 0;
+}
+
+// 5) Пару мыслей про шаблонынй тип
 template <class T> 
-bool isEven_4(T num) noexcept {
+inline bool isEven_5(T num) noexcept {
     return (num & 1) == 0;
 }
 // мы получили слишком "универсальную" функцию
@@ -59,6 +64,6 @@ bool isEven_4(T num) noexcept {
 // Я за SFINAE, но это слишком долго и сложно, плюс всегда можно допустить ошибку.
 
 // Поэтому могу предложить оставить данную функцию:
-bool isEven_3(std::size_t num) noexcept {
+inline bool isEven_4(std::size_t num) noexcept {
     return (num & 1) == 0;
 }
